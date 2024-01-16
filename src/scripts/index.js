@@ -23,6 +23,9 @@ const addCardFormElement = document.forms['new-place'];
 const cardTitleInput = addCardFormElement.elements['place-name'];
 const cardLinkInput = addCardFormElement.elements['link'];
 
+const imageElement = popupImage.querySelector('.popup__image');
+const descriptionElement = popupImage.querySelector('.popup__caption');
+
 // Вывести карточки на страницу
 function appendCards(cards) {
   cards.forEach((card) => {
@@ -48,16 +51,15 @@ addButton.addEventListener('click', () => {
 // Взаимодлействие с карточками
 function onCardRemove(card) {
   // Это понадобится в будущем для интеграции с API.
+  removeCard(card);
 }
 
 function onLikeCard(card) {
   // Это понадобится в будущем для интеграции с API.
+  likeCard(card);
 }
 
 function onImageClick(imageUrl, description) {
-  const imageElement = popupImage.querySelector('.popup__image');
-  const descriptionElement = popupImage.querySelector('.popup__caption');
-
   imageElement.src = imageUrl;
   imageElement.alt = description;
 
@@ -73,7 +75,7 @@ function handleEditFormSubmit(evt) {
   profileTitle.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
 
-  closeModal(evt);
+  closeModal(popupEdit);
 }
 
 editFormElement.addEventListener('submit', handleEditFormSubmit); 
@@ -85,14 +87,24 @@ function handleAddCardFormSubmit(evt) {
     name: cardTitleInput.value,
     link: cardLinkInput.value
   }
-
-  cardTitleInput.value = '';
-  cardLinkInput.value = '';
   
   const cardElement = createCard(card, onCardRemove, onLikeCard, onImageClick);
   cardList.prepend(cardElement);
   
-  closeModal(evt);
+  closeModal(popupAdd);
+
+  addCardFormElement.reset();
 }
 
 addCardFormElement.addEventListener('submit', handleAddCardFormSubmit);
+
+// Закрытие модалки по крестику
+const popupClose = document.querySelectorAll('.popup__close');
+
+popupClose.forEach((item) => {
+  console.log('asd');
+   const closestPopup = item.closest('.popup')
+   item.addEventListener('click', () => {
+    closeModal(closestPopup);
+   });
+});

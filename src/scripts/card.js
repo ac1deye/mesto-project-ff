@@ -13,11 +13,9 @@ export function createCard(card, onRemove, onLike, onImage) {
 
   cardElement.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('card__delete-button')) {
-      removeCard(cardElement);
-      onRemove(evt);
+      onRemove(cardElement);
     } else if (evt.target.classList.contains('card__like-button')) {
-      likeCard(likeButton);
-      onLike(likeButton);
+      onLike(cardElement);
     } else if (evt.target.classList.contains('card__image')) {
       onImage(card.link, card.name);
     }
@@ -30,6 +28,7 @@ export function removeCard(card) {
   card.remove();
 }
 
-export function likeCard(likeButton) {
+export function likeCard(card) {
+  const likeButton = card.querySelector('.card__like-button');
   likeButton.classList.toggle('card__like-button_is-active')
 }
