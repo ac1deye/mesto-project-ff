@@ -1,0 +1,10 @@
+.profile__image-overlay {
+  min-height: 100%;
+  opacity: 0;
+  background: #00000080 url('../../../images/edit-icon.svg') center no-repeat;
+  background-size: 26px 26px;
+}
+
+.profile__image:hover .profile__image-overlay {
+  opacity: 1;
+}

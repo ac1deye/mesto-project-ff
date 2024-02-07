@@ -1,4 +1,5 @@
 .profile__edit-button {
+  visibility: hidden;
   width: 24px;
   height: 24px;
   background: transparent url('../../../images/edit-icon.svg') center no-repeat;
